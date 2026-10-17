@@ -1,5 +1,8 @@
 name: Deploy Fallen Store to GitHub Pages
 
+# Runs on every push to main (i.e. every Lovable change that syncs to GitHub),
+# rebuilding the site and republishing it to GitHub Pages automatically.
+
 on:
   push:
     branches:
@@ -30,17 +33,39 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-                                                                                        
+          node-version: 22
+
       - name: Install dependencies
-        run:
-        node --version
-        npm --version
-        ls -la
-        cat package.json
-        npm install --verbose
-      - name: Build Fallen Store
+        run: npm install
+
+      - name: Compute base path
+        run: |
+          REPO_NAME="${GITHUB_REPOSITORY#*/}"
+          OWNER="${GITHUB_REPOSITORY%%/*}"
+          if [ "$REPO_NAME" = "${OWNER}.github.io" ]; then
+            BASE="/"
+          else
+            BASE="/$REPO_NAME/"
+          fi
+          echo "GITHUB_PAGES_BASE=$BASE" >> "$GITHUB_ENV"
+
+      - name: Build static site
+        env:
+          BUILD_TARGET: github-pages
         run: npm run build
+
+      - name: Prepare GitHub Pages output
+        run: |
+          cd dist/client
+          # GitHub Pages serves index.html at the root and 404.html for any
+          # unknown path — both boot the same client-only app shell, so every
+          # deep link (/shop, /cart, ...) renders correctly after the copy.
+          cp _shell.html index.html
+          cp _shell.html 404.html
+          # Sanity check: shell and app assets must exist.
+          test -f _shell.html
+          test -d assets
+          echo "Built output:"; ls
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
@@ -48,7 +73,7 @@ jobs:
       - name: Upload built website
         uses: actions/upload-pages-artifact@v4
         with:
-          path: dist
+          path: dist/client
 
       - name: Publish website
         id: deployment
