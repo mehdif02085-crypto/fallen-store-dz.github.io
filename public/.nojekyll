@@ -1,0 +1,2 @@
+# Disables Jekyll processing on GitHub Pages so underscore-prefixed files
+# (like the SPA shell _shell.html) are served as-is.
