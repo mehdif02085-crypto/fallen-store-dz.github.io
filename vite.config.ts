@@ -10,10 +10,10 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 // client-only bundle (SPA shell) instead of the Cloudflare worker build.
 // GitHub Pages cannot run the SSR server or server functions, so the app is
 // hosted as a static shell that renders in the browser.
-const isPages = process.env.BUILD_TARGET === "github-pages";
+const isPages = process.env["BUILD_TARGET"] === "github-pages";
 // Project sites are served under /<repo-name>/ — the base path must match,
 // otherwise assets and client-side routes 404.
-const pagesBase = process.env.GITHUB_PAGES_BASE || "/";
+const pagesBase = process.env["GITHUB_PAGES_BASE"] || "/";
 
 export default defineConfig({
   tanstackStart: {
