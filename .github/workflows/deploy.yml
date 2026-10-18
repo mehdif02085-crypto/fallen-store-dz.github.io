@@ -57,7 +57,7 @@ jobs:
       - name: Build static site
         env:
           BUILD_TARGET: github-pages
-        run: npm run build
+        run: bun run build
 
       - name: Prepare GitHub Pages output
         run: |
