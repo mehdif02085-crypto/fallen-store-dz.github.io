@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { publicPath } from "@/lib/site-path";
 
 /**
  * Product/design images can be either:
@@ -26,7 +27,7 @@ const cache = new Map<string, string>();
 export async function resolveImageUrl(value: string | null): Promise<string | null> {
   if (!value) return null;
   const ref = parseStorageRef(value);
-  if (!ref) return value;
+  if (!ref) return publicPath(value);
   const cached = cache.get(value);
   if (cached) return cached;
   const { data } = await supabase.storage
@@ -39,7 +40,7 @@ export async function resolveImageUrl(value: string | null): Promise<string | nu
 
 export function useImageUrl(value: string | null) {
   const [url, setUrl] = useState<string | null>(() =>
-    value && !parseStorageRef(value) ? value : (value ? cache.get(value) ?? null : null),
+    value && !parseStorageRef(value) ? publicPath(value) : (value ? cache.get(value) ?? null : null),
   );
 
   useEffect(() => {
@@ -49,7 +50,7 @@ export function useImageUrl(value: string | null) {
       return;
     }
     if (!parseStorageRef(value)) {
-      setUrl(value);
+      setUrl(publicPath(value));
       return;
     }
     void resolveImageUrl(value).then((resolved) => {

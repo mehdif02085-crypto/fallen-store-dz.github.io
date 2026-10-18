@@ -7,6 +7,7 @@ import { ProductCard } from "@/components/product-card";
 import { useI18n } from "@/lib/i18n";
 import { formatDA } from "@/lib/format";
 import { categoriesQuery, customSettingsQuery, productsQuery } from "@/lib/queries";
+import { publicPath } from "@/lib/site-path";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -57,7 +58,7 @@ function Home() {
       {/* HERO */}
       <section className="relative isolate">
         <img
-          src="/images/hero.jpg"
+          src={publicPath("/images/hero.jpg")}
           alt="T-shirt Fallen Store en coton heavyweight"
           width={1088}
           height={1440}
@@ -131,7 +132,7 @@ function Home() {
       <section className="mx-auto max-w-6xl px-5 pt-8">
         <div className="relative overflow-hidden rounded-3xl glass">
           <img
-            src="/images/custom-promo.jpg"
+            src={publicPath("/images/custom-promo.jpg")}
             alt="T-shirt personnalisé Fallen Store"
             loading="lazy"
             width={1024}
@@ -211,7 +212,7 @@ function Home() {
           ].map((src) => (
             <img
               key={src}
-              src={src}
+              src={publicPath(src)}
               alt="Fallen Store"
               loading="lazy"
               width={512}

@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { I18nProvider } from "@/lib/i18n";
 import { CartProvider } from "@/lib/cart";
+import { publicPath } from "@/lib/site-path";
 
 function NotFoundComponent() {
   return (
@@ -59,9 +60,9 @@ function ErrorComponent({ error, reset }: import("@tanstack/react-router").Error
           >
             Réessayer
           </button>
-          <a href="/" className="btn-ghost">
+          <Link to="/" className="btn-ghost">
             Accueil
-          </a>
+          </Link>
         </div>
       </div>
     </div>
@@ -97,7 +98,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Cairo:wght@400;600;700&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: publicPath("/favicon.ico"), type: "image/x-icon" },
     ],
   }),
   shellComponent: RootShell,

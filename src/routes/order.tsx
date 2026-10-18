@@ -10,6 +10,7 @@ import { useI18n, type TKey } from "@/lib/i18n";
 import { formatDA } from "@/lib/format";
 import { startPayment, syncPaymentStatus } from "@/lib/payments.functions";
 import { readPaymentToken } from "@/lib/payments/token";
+import { isGitHubPages } from "@/lib/site-path";
 
 type OrderSearch = { number?: string; phone?: string; new?: boolean; pay?: string };
 
@@ -92,7 +93,7 @@ function OrderPage() {
   // Returning from a provider redirect: ask the server to reconcile with the provider,
   // then re-read the order. The browser never decides the payment result.
   useEffect(() => {
-    if (!search.pay || !search.number || !search.phone) return;
+    if (isGitHubPages || !search.pay || !search.number || !search.phone) return;
     let cancelled = false;
     void (async () => {
       try {
@@ -173,7 +174,7 @@ function OrderPage() {
           </div>
         )}
 
-        {order && (pendingPayment || failedPayment) && !paid && order.payment_method !== "cod" && (
+        {!isGitHubPages && order && (pendingPayment || failedPayment) && !paid && order.payment_method !== "cod" && (
           <button
             type="button"
             onClick={() => void retryPayment()}

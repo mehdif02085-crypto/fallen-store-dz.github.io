@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { supabase } from "@/integrations/supabase/client";
 import { useI18n } from "@/lib/i18n";
+import { publicPath } from "@/lib/site-path";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
@@ -51,7 +52,7 @@ function AuthPage() {
       const { error: signUpError } = await supabase.auth.signUp({
         email: email.trim(),
         password,
-        options: { emailRedirectTo: `${window.location.origin}/auth` },
+        options: { emailRedirectTo: new URL(publicPath("/auth"), window.location.origin).toString() },
       });
       setBusy(false);
       if (signUpError) {

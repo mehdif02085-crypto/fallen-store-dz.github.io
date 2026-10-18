@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { getPaymentIntegrations } from "@/lib/payments.functions";
 import { paymentMethodsQuery } from "@/lib/queries";
 import type { IntegrationState, ProviderIntegration } from "@/lib/payments/types";
+import { isGitHubPages } from "@/lib/site-path";
 
 export const Route = createFileRoute("/admin/payments")({
   ssr: false,
@@ -42,12 +43,17 @@ function AdminPayments() {
   const { data: integrations = [], isLoading } = useQuery<ProviderIntegration[]>({
     queryKey: ["payment_integrations"],
     queryFn: () => fetchIntegrations(),
+    enabled: !isGitHubPages,
   });
   const { data: methods = [] } = useQuery(paymentMethodsQuery);
 
   const byKey = new Map(integrations.map((i) => [i.key, i]));
 
   async function toggle(code: string, next: boolean, providerKey: string) {
+    if (isGitHubPages && code !== "cod" && next) {
+      setNotice("Les paiements en ligne nécessitent un serveur et ne sont pas disponibles sur GitHub Pages.");
+      return;
+    }
     const integ = byKey.get(providerKey as ProviderIntegration["key"]);
     if (next && integ && (integ.state === "not_configured" || integ.state === "missing_credentials")) {
       setNotice(
@@ -74,6 +80,12 @@ function AdminPayments() {
       </div>
 
       {notice && <p className="rounded-2xl glass p-3 text-xs text-danger">{notice}</p>}
+      {isGitHubPages && (
+        <p className="text-xs text-mut">
+          GitHub Pages : paiement à la livraison uniquement. La configuration et la vérification
+          des paiements en ligne restent disponibles sur le site hébergé par Lovable.
+        </p>
+      )}
 
       <section className="space-y-3">
         {isLoading && <p className="text-xs text-mut">Chargement…</p>}
