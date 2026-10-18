@@ -20,13 +20,20 @@ export default defineConfig({
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
-    ...(isPages ? { spa: { enabled: true } } : {}),
+    ...(isPages ? { spa: { enabled: true }, prerender: { failOnError: true } } : {}),
   },
   ...(isPages
     ? {
-        // Static output (plain files) for the GitHub Pages artifact.
-        nitro: { preset: "static" },
-        vite: { base: pagesBase },
+        // A build-only server renders the SPA shell. Upload ONLY dist/client.
+        // Nitro's static preset does not retain the server needed by Start's prerender pass.
+        nitro: {
+          preset: "node-server",
+          output: { dir: "dist", publicDir: "dist/client", serverDir: "dist/server" },
+        },
+        vite: {
+          base: pagesBase,
+          define: { "import.meta.env.VITE_HOSTING_TARGET": JSON.stringify("github-pages") },
+        },
       }
     : {}),
 });

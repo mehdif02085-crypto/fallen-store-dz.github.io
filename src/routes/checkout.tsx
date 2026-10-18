@@ -11,6 +11,7 @@ import { formatDA, isValidAlgerianPhone, normalizePhone } from "@/lib/format";
 import { startPayment } from "@/lib/payments.functions";
 import { savePaymentToken } from "@/lib/payments/token";
 import { deliverySettingsQuery, paymentMethodsQuery, wilayasQuery } from "@/lib/queries";
+import { isGitHubPages, paymentAvailable } from "@/lib/site-path";
 
 const KEY_STORAGE = "fallen.checkout.key";
 
@@ -79,7 +80,7 @@ function Checkout() {
   const [formError, setFormError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
-  const enabled = methods.filter((m) => m.is_enabled);
+  const enabled = methods.filter((m) => paymentAvailable(m.code, m.is_enabled, isGitHubPages));
   const activeMethod = method || enabled[0]?.code || "";
 
   const wilaya = wilayas.find((w) => String(w.code) === wilayaCode);
@@ -343,7 +344,7 @@ function Checkout() {
               </h2>
               <div className="space-y-2">
                 {methods.map((m) => {
-                  const available = m.is_enabled;
+                  const available = paymentAvailable(m.code, m.is_enabled, isGitHubPages);
                   return (
                     <label
                       key={m.code}
