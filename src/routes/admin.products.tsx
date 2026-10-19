@@ -9,6 +9,17 @@ import { formatDA } from "@/lib/format";
 import { allProductsAdminQuery, categoriesQuery, sortImages, type Product } from "@/lib/queries";
 
 export const Route = createFileRoute("/admin/products")({
+  head: () => ({
+    meta: [
+      { title: "Produits — Administration | Fallen Store" },
+      { name: "description", content: "Gestion produits de la boutique Fallen Store." },
+      { property: "og:title", content: "Produits — Administration | Fallen Store" },
+      { property: "og:description", content: "Administration Fallen Store : produits." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "robots", content: "noindex" },
+    ],
+  }),
   component: AdminProducts,
 });
 

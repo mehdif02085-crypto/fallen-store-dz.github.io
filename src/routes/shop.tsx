@@ -31,6 +31,8 @@ export const Route = createFileRoute("/shop")({
         property: "og:description",
         content: "Filtrez par catégorie, taille et prix. Livraison dans toute l'Algérie.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Shop,

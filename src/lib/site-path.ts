@@ -10,7 +10,7 @@ export function publicPath(path: string): string {
   return withSiteBase(path, import.meta.env.BASE_URL || "/");
 }
 
-export const isGitHubPages = import.meta.env.VITE_HOSTING_TARGET === "github-pages";
+export const isGitHubPages = import.meta.env['VITE_HOSTING_TARGET'] === "github-pages";
 
 /** Pages has no payment server; keep unavailable methods visible but unselectable. */
 export function paymentAvailable(code: string, enabled: boolean, staticHosting: boolean): boolean {

@@ -5,6 +5,17 @@ import { customersQuery } from "@/lib/admin";
 import { formatDA } from "@/lib/format";
 
 export const Route = createFileRoute("/admin/customers")({
+  head: () => ({
+    meta: [
+      { title: "Clients — Administration | Fallen Store" },
+      { name: "description", content: "Gestion clients de la boutique Fallen Store." },
+      { property: "og:title", content: "Clients — Administration | Fallen Store" },
+      { property: "og:description", content: "Administration Fallen Store : clients." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "robots", content: "noindex" },
+    ],
+  }),
   component: AdminCustomers,
 });
 

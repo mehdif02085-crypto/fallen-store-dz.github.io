@@ -20,6 +20,8 @@ export const Route = createFileRoute("/account")({
       { name: "robots", content: "noindex" },
       { property: "og:title", content: "Mon compte | Fallen Store" },
       { property: "og:description", content: "Espace membre Fallen Store." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: AccountPage,

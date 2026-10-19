@@ -5,6 +5,17 @@ import { supabase } from "@/integrations/supabase/client";
 import { allProductsAdminQuery } from "@/lib/queries";
 
 export const Route = createFileRoute("/admin/inventory")({
+  head: () => ({
+    meta: [
+      { title: "Inventaire — Administration | Fallen Store" },
+      { name: "description", content: "Gestion inventaire de la boutique Fallen Store." },
+      { property: "og:title", content: "Inventaire — Administration | Fallen Store" },
+      { property: "og:description", content: "Administration Fallen Store : inventaire." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "robots", content: "noindex" },
+    ],
+  }),
   component: AdminInventory,
 });
 

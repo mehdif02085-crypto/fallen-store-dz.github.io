@@ -3,6 +3,17 @@ import { useQuery } from "@tanstack/react-query";
 import { ACTION_LABEL, adminStatusQuery, auditQuery } from "@/lib/admin";
 
 export const Route = createFileRoute("/admin/audit")({
+  head: () => ({
+    meta: [
+      { title: "Journal de sécurité — Administration | Fallen Store" },
+      { name: "description", content: "Gestion journal de sécurité de la boutique Fallen Store." },
+      { property: "og:title", content: "Journal de sécurité — Administration | Fallen Store" },
+      { property: "og:description", content: "Administration Fallen Store : journal de sécurité." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "robots", content: "noindex" },
+    ],
+  }),
   component: AdminAudit,
 });
 

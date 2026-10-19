@@ -12,6 +12,17 @@ import {
 } from "@/lib/admin";
 
 export const Route = createFileRoute("/admin/team")({
+  head: () => ({
+    meta: [
+      { title: "Administrateurs — Administration | Fallen Store" },
+      { name: "description", content: "Gestion administrateurs de la boutique Fallen Store." },
+      { property: "og:title", content: "Administrateurs — Administration | Fallen Store" },
+      { property: "og:description", content: "Administration Fallen Store : administrateurs." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "robots", content: "noindex" },
+    ],
+  }),
   component: AdminTeam,
 });
 

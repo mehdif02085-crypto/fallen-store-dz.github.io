@@ -5,6 +5,17 @@ import { supabase } from "@/integrations/supabase/client";
 import { formatDA } from "@/lib/format";
 
 export const Route = createFileRoute("/admin/")({
+  head: () => ({
+    meta: [
+      { title: "Commandes — Administration | Fallen Store" },
+      { name: "description", content: "Gestion commandes de la boutique Fallen Store." },
+      { property: "og:title", content: "Commandes — Administration | Fallen Store" },
+      { property: "og:description", content: "Administration Fallen Store : commandes." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "robots", content: "noindex" },
+    ],
+  }),
   component: AdminOrders,
 });
 
