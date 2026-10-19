@@ -117,7 +117,15 @@ After the workflow succeeds, test the deployed address on desktop and mobile:
 8. Confirm online payment options cannot be selected on Pages.
 9. Confirm HTTPS is valid and there are no broken assets or browser errors.
 
-Known-page shells support direct links with HTTP 200. Dynamic product deep links use GitHub's `404.html` fallback: the app can render the correct product, but GitHub still returns HTTP 404 for that initial request. GitHub Pages has no configurable SPA rewrite; fully successful HTTP status codes for every dynamic URL require generating each product path at build time or different hosting.
+The preparation script creates known-page shells intended to support direct links with HTTP 200. Dynamic product deep links use GitHub's `404.html` fallback: the app can render the correct product, but GitHub still returns HTTP 404 for that initial request. GitHub Pages has no configurable SPA rewrite; fully successful HTTP status codes for every dynamic URL require generating each product path at build time or different hosting. This behavior remains to be verified on the live deployment.
+
+### Checks completed in this task
+
+- Ten automated hosting-rule tests passed; workflow YAML parsed successfully.
+- The latest standard Lovable build reports **build OK**. The revised external GitHub Pages build has **not** been executed or verified here; a successful Actions run is still required. The failed run's full error was not publicly available, so its exact cause remains unconfirmed.
+- The local website loaded real products, the home images, shop, custom designer and sign-in page. A real product direct link and refresh worked; a signed-out admin visit returned to sign-in. No browser runtime errors occurred in those checks.
+- Mobile checks at 390 pixels wide found no horizontal overflow on home, shop, custom designer or sign-in.
+- Authenticated admin operations, a new cash-on-delivery order, confirmation-email settings, and the deployed static artifact were not verified in this task. Existing data was not modified for testing.
 
 If a run fails, open its failed step and provide the error text—never private credentials. Live deployment remains **unverified** until these checks pass.
 
