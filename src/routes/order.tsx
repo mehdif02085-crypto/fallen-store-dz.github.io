@@ -60,6 +60,8 @@ export const Route = createFileRoute("/order")({
       },
       { property: "og:title", content: "Suivi de commande | Fallen Store" },
       { property: "og:description", content: "Retrouvez l'état de votre commande." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: OrderPage,

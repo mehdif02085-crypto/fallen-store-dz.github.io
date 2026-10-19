@@ -51,6 +51,8 @@ export const Route = createFileRoute("/checkout")({
         property: "og:description",
         content: "Livraison dans les 58 wilayas, paiement à la livraison.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Checkout,

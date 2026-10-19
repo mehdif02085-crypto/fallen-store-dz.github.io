@@ -18,6 +18,8 @@ export const Route = createFileRoute("/cart")({
       },
       { property: "og:title", content: "Panier | Fallen Store" },
       { property: "og:description", content: "Vérifiez vos articles avant de commander." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: CartPage,

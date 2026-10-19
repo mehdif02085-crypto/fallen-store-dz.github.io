@@ -6,6 +6,17 @@ import { storageRef } from "@/lib/image";
 import { formatDA } from "@/lib/format";
 
 export const Route = createFileRoute("/admin/designs")({
+  head: () => ({
+    meta: [
+      { title: "Personnalisations — Administration | Fallen Store" },
+      { name: "description", content: "Gestion personnalisations de la boutique Fallen Store." },
+      { property: "og:title", content: "Personnalisations — Administration | Fallen Store" },
+      { property: "og:description", content: "Administration Fallen Store : personnalisations." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "robots", content: "noindex" },
+    ],
+  }),
   component: AdminDesigns,
 });
 

@@ -24,6 +24,8 @@ export const Route = createFileRoute("/")({
         content:
           "Nouveautés, meilleures ventes et t-shirts personnalisés. Prix en DA, livraison partout en Algérie.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Home,

@@ -11,6 +11,17 @@ import {
 } from "@/lib/queries";
 
 export const Route = createFileRoute("/admin/settings")({
+  head: () => ({
+    meta: [
+      { title: "Réglages — Administration | Fallen Store" },
+      { name: "description", content: "Gestion réglages de la boutique Fallen Store." },
+      { property: "og:title", content: "Réglages — Administration | Fallen Store" },
+      { property: "og:description", content: "Administration Fallen Store : réglages." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "robots", content: "noindex" },
+    ],
+  }),
   component: AdminSettings,
 });
 

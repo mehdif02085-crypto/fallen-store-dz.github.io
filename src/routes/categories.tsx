@@ -20,6 +20,8 @@ export const Route = createFileRoute("/categories")({
         property: "og:description",
         content: "Toutes les catégories de la boutique streetwear Fallen Store.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Categories,

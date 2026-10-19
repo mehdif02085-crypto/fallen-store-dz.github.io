@@ -18,6 +18,8 @@ export const Route = createFileRoute("/auth")({
       { name: "robots", content: "noindex" },
       { property: "og:title", content: "Espace administrateur | Fallen Store" },
       { property: "og:description", content: "Connexion équipe Fallen Store." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: AuthPage,

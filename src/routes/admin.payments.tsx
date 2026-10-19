@@ -10,6 +10,17 @@ import { isGitHubPages } from "@/lib/site-path";
 
 export const Route = createFileRoute("/admin/payments")({
   ssr: false,
+  head: () => ({
+    meta: [
+      { title: "Paiements — Administration | Fallen Store" },
+      { name: "description", content: "Gestion paiements de la boutique Fallen Store." },
+      { property: "og:title", content: "Paiements — Administration | Fallen Store" },
+      { property: "og:description", content: "Administration Fallen Store : paiements." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "robots", content: "noindex" },
+    ],
+  }),
   component: AdminPayments,
 });
 

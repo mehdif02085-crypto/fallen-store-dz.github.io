@@ -26,6 +26,8 @@ export const Route = createFileRoute("/admin")({
       { name: "robots", content: "noindex" },
       { property: "og:title", content: "Tableau de bord | Fallen Store" },
       { property: "og:description", content: "Administration Fallen Store." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: AdminLayout,

@@ -25,6 +25,8 @@ export const Route = createFileRoute("/product/$slug")({
         property: "og:description",
         content: "Coton heavyweight, coupe oversized. Ajoutez au panier en une taille.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: ProductPage,
